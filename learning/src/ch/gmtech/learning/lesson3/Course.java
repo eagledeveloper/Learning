@@ -1,4 +1,4 @@
-package ch.gmtech.learning.lesson2;
+package ch.gmtech.learning.lesson3;
 
 public class Course {
 	
