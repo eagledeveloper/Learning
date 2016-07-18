@@ -12,6 +12,10 @@ public class PresenterChooser {
 
 	public static void main(String[] args) {
 		
+//		String pathRegistered = "";
+		
+//		Files.readAllLines(pathRegistered, new Charse);
+		
 		List<String> newPresenters = new ArrayList<String>();
 		newPresenters.addAll(presenters);
 		
