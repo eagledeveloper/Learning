@@ -1,21 +1,23 @@
 package ch.gmtech.learning.lesson3;
 
+import java.util.List;
+
 public class Seminar {
 	
-	private Course course;
-	private Enrollment enrollment;
-	private String location;
-	private int seatsLeft;
+	private final Course course;
+	private final String location;
+	private final int seatsLeft;
+	private final List<Student> studentList;
 	
-	public Seminar(Course course, Enrollment enrollment, String location, int seatsLeft) {
+	public Seminar(Course course, String location, int seatsLeft, List<Student> studentList) {
 		this.course = course;
-		this.enrollment = enrollment;
 		this.location = location;
 		this.seatsLeft = seatsLeft;
+		this.studentList = studentList;
 	}
 	
-	public String getName() {
-		return course.getName() + ", number: " + course.getNumber();
+	public String getNameNumber() {
+		return course.getName() + ":" + course.getNumber();
 	}
 	
 	public String getDescription() {
@@ -31,11 +33,17 @@ public class Seminar {
 	}
 	
 	public String getStudentList() {
-		return enrollment.getInfo();
+		String info = "";
+		
+		for(Student student: studentList) {
+			info += student.getInfo() + "\n"; 
+		}
+		
+		return info;
 	}
 
 	public String show() {
-		return "Name: " + getName() + "\nDescription: " + getDescription()+ "\nLocation: " + getLocation() 
+		return "Name: " + getNameNumber() + "\nDescription: " + getDescription()+ "\nLocation: " + getLocation() 
 				+ "\nSeats left: " + getSeatsLeft() + "\nStudents: " + getStudentList();
 	}
 

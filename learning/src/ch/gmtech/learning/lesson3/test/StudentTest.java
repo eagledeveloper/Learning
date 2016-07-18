@@ -1,6 +1,6 @@
 package ch.gmtech.learning.lesson3.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -13,6 +13,5 @@ public class StudentTest {
 		Student student = new Student("firstName", "lastName");
 		assertEquals("firstName lastName", student.getInfo());
 	}
-	
 
 }
