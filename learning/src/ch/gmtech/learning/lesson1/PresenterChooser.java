@@ -16,13 +16,15 @@ public class PresenterChooser {
 
 	public static void main(String[] args) throws IOException {
 		
-		String pathRegistered = "/Data/Reporting/Valentino/Learning/registered.txt";
-		String pathExcluded = "/Data/Reporting/Valentino/Learning/excluded.txt";
+//		String pathRegistered = "/Data/Reporting/Valentino/Learning/registered.txt";
+		String pathRegistered = "./registered.txt";
+//		String pathExcluded = "/Data/Reporting/Valentino/Learning/excluded.txt";
+		String pathExcluded = "./excluded.txt";
 		
 		List<String> registered = list(pathRegistered);
 		List<String> excluded = list(pathExcluded);
 		
-		System.out.println("Total number of possible presenters: " + presenters.size());
+		System.out.println("Total number of possible presenters: " + registered.size());
 		System.out.println("Presenters to remove: " + excluded);
 		
 		registered.removeAll(excluded);
