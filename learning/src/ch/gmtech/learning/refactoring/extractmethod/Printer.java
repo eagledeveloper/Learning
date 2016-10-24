@@ -21,7 +21,7 @@ public class Printer {
 			outstanding += each.getAmount();
 		}
 		// print details
-		System.out.println("name:" + _name );
+		System.out.println("name: " + _name );
 		System.out.println("amount: " + outstanding);
 	}
 	
