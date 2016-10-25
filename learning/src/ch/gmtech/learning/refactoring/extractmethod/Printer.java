@@ -1,6 +1,5 @@
 package ch.gmtech.learning.refactoring.extractmethod;
 
-import java.util.Enumeration;
 import java.util.Vector;
 
 public class Printer {
@@ -9,20 +8,29 @@ public class Printer {
 	private String _name = "Valentino";
 
 	public void printOwing() {
-		Enumeration e = _orders.elements();
+		
+		printHeader();
+		
+		printDetails(calculateOutstanding());
+	}
+
+	private double calculateOutstanding() {
 		double outstanding = 0.0;
-		// print banner
+		for(Order order : _orders) {
+			outstanding += order.getAmount();
+		}
+		return outstanding;
+	}
+
+	private void printDetails(double outstanding) {
+		System.out.println("name: " + _name );
+		System.out.println("amount: " + outstanding);
+	}
+
+	private void printHeader() {
 		System.out.println("**************************");
 		System.out.println("***** Customer Owes ******");
 		System.out.println("**************************");
-		// calculate outstanding
-		while (e.hasMoreElements()) {
-			Order each = (Order) e.nextElement();
-			outstanding += each.getAmount();
-		}
-		// print details
-		System.out.println("name: " + _name );
-		System.out.println("amount: " + outstanding);
 	}
 	
 	public void addOrder(Order order) {

@@ -12,7 +12,6 @@ import org.junit.Test;
 public class PrinterTest {
 	
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 	
 	private final String expected = "**************************\n" +
 			"***** Customer Owes ******\n" +
@@ -23,13 +22,11 @@ public class PrinterTest {
 	@Before
 	public void setUpStreams() {
 	    System.setOut(new PrintStream(outContent));
-	    System.setErr(new PrintStream(errContent));
 	}
 
 	@After
 	public void cleanUpStreams() {
 	    System.setOut(null);
-	    System.setErr(null);
 	}
 
 	@Test
