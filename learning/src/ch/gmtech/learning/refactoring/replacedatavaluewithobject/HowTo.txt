@@ -1,0 +1,8 @@
+• Create the class for the value. Give it a final field of the same type as the value in the source class. Add a getter and a constructor that takes the field as an argument.
+• Compile.
+• Change the type of the field in the source class to the new class.
+• Change the getter in the source class to call the getter in the new class.
+• If the field is mentioned in the source class constructor, assign the field using the constructor of the new class.
+• Change the getting method to create a new instance of the new class.
+• Compile and test.
+• You may now need to use Change Value to Reference on the new object.
