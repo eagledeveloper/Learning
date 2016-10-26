@@ -1,0 +1,15 @@
+package ch.gmtech.learning.refactoring.replacedatavaluewithobject;
+
+public class Customer {
+	
+	private final String _name;
+	
+	public Customer(String name) {
+		_name = name;
+	}
+	
+	protected String getName() {
+		return _name;
+	}
+
+}
