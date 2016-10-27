@@ -1,0 +1,17 @@
+
+A class has a numeric type code that does not affect its behavior.
+
+Replace the type code with a class only if the type code is pure data
+
+
+
+
+Mechanics
+
+• Create a new class for the type code.
+• Modify the implementation of the source class to use the new class.
+• For each method on the source class that uses the code, create a new method that uses the new class instead.
+• One by one, change the clients of the source class so that they use the new interface.
+• Remove the old interface that uses the codes, and remove the static declarations of the codes
+
+
