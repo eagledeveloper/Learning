@@ -1,0 +1,13 @@
+Motivation
+
+A class is doing too much simple delegation.
+Get the client to call the delegate directly.
+The price is that every time the client wants to use a new feature of the delegate, you have to add a simple delegating method to the server.
+A good encapsulation six months ago may be awkward now.
+
+
+Mechanics
+
+• Create an accessor for the delegate.
+• For each client use of a delegate method, remove the method from the server and replace the call in the client to call method on the delegate.
+
