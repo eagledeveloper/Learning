@@ -1,0 +1,18 @@
+Motivation
+
+A client is calling a delegate class of an object.
+Create methods on the server to hide the delegate.
+
+Encapsulation means that objects need to know less about other parts of the system. 
+You should hide your fields.
+Extract Class
+
+
+Mechanics
+
+• For each method on the delegate, create a simple delegating method on the server.
+• Adjust the client to call the server. (If the client is not in the same package as the server, consider
+changing the delegate method's access to package visibility)
+• If no client needs to access the delegate anymore, remove the server's accessor for the
+delegate.
+
