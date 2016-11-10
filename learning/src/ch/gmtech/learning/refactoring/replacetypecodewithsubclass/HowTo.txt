@@ -1,0 +1,14 @@
+
+You have an immutable type code that affects the behavior of a class.
+
+Replace the type code with subclasses.
+
+
+Mechanics
+• Self-encapsulate the type code.
+If the type code is passed into the constructor, you need to replace the constructor with a factory method.
+• For each value of the type code, create a subclass. Override the getting method of the type code in the subclass to return the relevant value.
+• Remove the type code field from the superclass. Declare the accessors for the type code as abstract.
+
+
+
