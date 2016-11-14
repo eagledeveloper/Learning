@@ -1,0 +1,23 @@
+Motivation
+
+You're using delegation and are often writing many simple delegations for the entire interface.
+Make the delegating class a subclass of the delegate.
+
+Flip side of Replace Delegation with Inheritance.
+Using all the methods of the delegate, switch back to inheritance pretty easily. 
+If you aren't using all the methods of the class to which you are delegating, you shouldn't use Replace Delegation with Inheritance.
+The clients call the delegate themselves with Remove Middle Man.
+You can use Extract Superclass to separate the common interface and then inherit from the new class.
+You can use Extract Interface in a similar way.
+Beware of if delegate is shared by more than one object and is mutable, because you'll no longer
+share the data. Data sharing is a responsibility that cannot be transferred back to inheritance.
+
+
+Mechanics
+
+• Make the delegating object a subclass of the delegate. (You may get some method clashes at this point; methods may have the same name
+but vary in return type, exceptions, or visibility. Use Rename Method to fix these)
+• Set the delegate field to be the object itself.
+• Remove the simple delegation methods.
+• Replace all other delegations with calls to the object itself.
+• Remove the delegate field.
