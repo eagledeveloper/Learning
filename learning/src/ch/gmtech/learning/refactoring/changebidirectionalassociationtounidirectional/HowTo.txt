@@ -1,0 +1,22 @@
+Motivation
+
+You have a two-way association but one class no longer needs features from the other.
+Drop the unneeded end of the association.
+
+Bidirectional associations force an interdependency between the two classes.
+Many interdependencies lead to a highly coupled system.
+Use bidirectional associations when you need to but not when you don't.
+
+
+Mechanics
+
+• Examine all the readers of the field that holds the pointer that you wish to remove to see whether the removal is feasible.
+?rarr; Look at direct readers and further methods that call the methods.
+?rarr; Consider whether it is possible to determine the other object without using the pointer. If so you will be able to use Substitute
+Algorithm on the getter to allow clients to use the getting method even if there is no pointer.
+?rarr; Consider adding the object as an argument to all methods that use the field.
+• If clients need to use the getter, use Self Encapsulate Field, carry out Substitute Algorithm on the getter, compile, and test.
+• If clients don't need the getter, change each user of the field so that it gets the object in the field another way. Compile and test after each change.
+• When no reader is left in the field, remove all updates to the field, and remove the field.
+?rarr; If there are many places that assign the field, use Self Encapsulate Field so that they all use a single setter.
+Change the setter to have an empty body. Compile and test. If that works, remove the field, the setter, and all calls to the setter.
