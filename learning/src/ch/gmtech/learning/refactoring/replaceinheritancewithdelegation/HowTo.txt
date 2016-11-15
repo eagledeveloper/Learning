@@ -1,0 +1,17 @@
+Motivation
+
+A subclass uses only part of a superclasses interface or does not want to inherit data.
+Create a field for the superclass, adjust methods to delegate to the superclass, and remove the subclassing.
+
+Often you start inheriting from a class but then find that many of the superclass operations aren't really true of the subclass.
+Interface that's not a true reflection of what the class does.
+Inheriting a whole load of data that is not appropriate for the subclass.
+ 
+
+Mechanics
+
+• Create a field in the subclass that refers to an instance of the superclass. Initialize it to this.
+• Change each method defined in the subclass to use the delegate field. (You won't be able to replace any methods that invoke a method on super
+that is defined on the subclass, or they may get into an infinite recurse. These methods can be replaced only after you have broken the inheritance.
+• Remove the subclass declaration and replace the delegate assignment with an assignment to a new object.
+• For each superclass method used by a client, add a simple delegating method.
