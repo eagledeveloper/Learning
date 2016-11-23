@@ -1,0 +1,15 @@
+Motivation
+
+A server class you are using needs an additional method, but you can't modify the class.
+Create a method in the client class with an instance of the server class as its first argument.
+There is one service it doesn't give you but should.
+If you can change the source, you can add in the method.
+If you can't change the source, you have to code around the lack of the method in the client.
+Creating many foreign methods on a server class, or many of your classes need the same foreign method, you should use Introduce Local Extension instead.
+Foreign methods are a work-around.
+
+Mechanics
+
+• Create a method in the client class that does what you need (The method should not access any of the features of the client class. If it needs a value, send it in as a parameter).
+• Make an instance of the server class the first parameter.
+• Comment the method as "foreign method; should be in server (this way you can use a text search to find foreign methods later if you get the chance to move the method).
