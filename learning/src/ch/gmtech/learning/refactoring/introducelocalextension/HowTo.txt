@@ -1,0 +1,20 @@
+Motivation
+
+A server class you are using needs several additional methods, but you can't modify the class.
+Create a new class that contains these extra methods. Make this extension class a subclass or a wrapper of the original.
+If you can modify the source, often the best thing is to add that method.
+If you need one or two methods, you can use Introduce Foreign Method.
+Separate class, but a subtype that supports all the things do but also adds the extra features.
+Subclass is less work.
+Original is immutable mean no problem.
+The original can change, problem, changes in one object won't change the other and I have to use a wrapper.
+
+
+Mechanics
+
+• Create an extension class either as a subclass or a wrapper of the original.
+• Add converting constructors to the extension (A constructor takes the original as an argument.
+ The subclass version calls an appropriate superclass constructor; the wrapper version sets the delegate field to the argument).
+• Add new features to the extension.
+• Replace the original with the extension where needed.
+• Move any foreign methods defined for this class onto the extension.
