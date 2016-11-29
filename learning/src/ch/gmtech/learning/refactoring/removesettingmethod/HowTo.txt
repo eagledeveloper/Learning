@@ -1,0 +1,16 @@
+Motivation
+
+A field should be set at creation time and never altered. Remove any setting method for that field.
+Providing a setting method indicates that a field may be changed. If you don't want that field to change once the object is created,
+then don't provide a setting method (and make the field final). That way your intention is clear and you often remove the very
+possibility that the field will change.
+
+
+Mechanics
+
+• Check that the setting method is called only in the constructor, or in a method called by the constructor.
+• Modify the constructor to access the variables directly (you cannot do this if you have a subclass setting the private fields of a
+superclass. In this case you should try to provide a protected superclass method (ideally a constructor) to set these values.
+Whatever you do, don't give the superclass method a name that will confuse it with a setting method).
+• Remove the setting method and make the field final.
+
