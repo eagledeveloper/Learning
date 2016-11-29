@@ -1,0 +1,22 @@
+Motivation
+
+A method returns a collection. Make it return a read-only view and provide add/remove methods.
+Often a class contains a collection, such cases often have the usual getter and setter for the collection.
+The getter should not return the collection object itself, because that allows clients to manipulate the
+contents. It also reveals too much to clients about the object's internal data structures. A getter for a multivalued attribute
+should return something that prevents manipulation of the collection and hides unnecessary details about its structure.
+In addition there should not be a setter for collection but there should be operations to add and remove elements.
+This gives control to the owning object.
+With this protocol the collection is properly encapsulated, which reduces the coupling of the owning class to its clients.
+
+
+Mechanics
+
+• Add an add and remove method for the collection.
+• Initialize the field to an empty collection.
+• Find callers of the setting method. Either modify the setting method to use the add and remove operations or have the clients
+call those operations instead (Setters are used when the collection is empty and when the setter is replacing a nonempty collection,
+you may wish to use Rename Method to rename the setter. Change it from set to initialize or replace).
+• Find all users of the getter that modify the collection. Change them to use the add and remove methods.
+• When all uses of the getter that modify have been changed, modify the getter to return a read-only view of the collection.
+
