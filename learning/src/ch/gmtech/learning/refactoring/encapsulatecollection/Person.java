@@ -13,11 +13,7 @@ public class Person {
 	}
 
 	public void replaceCourses(Set<Course> courses) {
-		_courses = new HashSet<>();
-		
-		for(Course course : courses) {
-			addCourse(course);
-		}
+		_courses.addAll(courses);
 	}
 	
 	public boolean addCourse(Course course) {
