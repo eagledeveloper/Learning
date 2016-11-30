@@ -1,0 +1,12 @@
+Motivation
+
+A field is used only by some subclasses. Move the field to those subclasses.
+Push Down Field is the opposite of Pull Up Field. Use it when you don't need a field in the superclass but only in a subclass.
+
+
+Mechanics
+
+• Declare the field in all subclasses.
+• Remove the field from the superclass.
+• Remove the field from all subclasses that don't need it.
+
