@@ -1,0 +1,16 @@
+Motivation
+
+A method is not used by any other class. Make the method private.
+Refactoring often causes you to change decisions about the visibility of methods.
+Cases in which you need to make a method more visible: another class needs it and you thus relax the visibility.
+A tool should check all methods to see whether they can be hidden or manually at regular intervals.
+A case is most common when you are starting with a class that is little more than an encapsulated data holder. As more behavior is built
+into the class, you may find that many of the getting and setting methods are no longer needed publicly, in which case they can be hidden. 
+
+
+Mechanics
+
+• Check regularly for opportunities to make a method more private (Use a lint-style tool, do manual checks every so often, and check when
+you remove a call to a method in another class. Particularly look for cases such as this with setting methods).
+• Make each method as private as you can.
+
