@@ -1,0 +1,19 @@
+Motivation
+
+A section of code assumes something about the state of the program. Make the assumption explicit with an assertion.
+Often sections of code work only if certain conditions are true.
+An assertion is a conditional statement that is assumed to be always true.
+Assertion failures should always result in unchecked exceptions.
+Assertions should never be used by other parts of the system. Indeed assertions usually are removed for production code.
+It is therefore important to signal something is an assertion.
+Assertions act as communication and debugging aids.
+Debugging help is less important when I write self-testing code
+
+
+Mechanics
+
+Use assertions only to check things that need to be true.
+If the code works without the assertion, the assertion is confusing rather than helpful.
+Beware of duplicate code in assertions. Duplicate code smells just as bad in assertion checks as it does anywhere else.
+Use Extract Method liberally to get rid of the duplication.
+
