@@ -25,7 +25,17 @@ public class Servlet extends HttpServlet {
 			printAndDownloadCsv(resp);
 		} else if(req.getRequestURI().equals("/course/raw")) {
 			resp.getWriter().write(new PrintFactory(prepareSeminar()).printPlain());
+		} else if(req.getRequestURI().equals("/try/bootstrap")) {
+			resp.getWriter().write(PrintFactory.printForm());
+		} else if(req.getRequestURI().equals("/course/create")) {
+			resp.getWriter().write(PrintFactory.printForm());
 		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
 	}
 
 	private void printAndDownloadCsv(HttpServletResponse resp) throws IOException {
@@ -53,4 +63,6 @@ public class Servlet extends HttpServlet {
 		seminar.enroll(new Student("Ugo", "Campione"));
 		return seminar;
 	}
+	
+	
 }

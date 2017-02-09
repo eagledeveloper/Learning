@@ -7,13 +7,19 @@ public class Seminar {
 	
 	private final Course _course;
 
-	private final int _capacity = 20;
+	private final int _capacity;
+	private final static int DEFAULT_CAPACITY = 20;
 	private final String _location;
 	private final List<Student> _students = new ArrayList<Student>();
 	
 	public Seminar(String location, Course course) {
+		this(location, course, DEFAULT_CAPACITY);
+	}
+	
+	public Seminar(String location, Course course, int capacity) {
 		_course = course;
 		_location = location;
+		_capacity = capacity;
 	}
 
 	public Course course() {
