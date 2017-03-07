@@ -11,7 +11,9 @@ public class Html extends SeminarPrinter {
 						+ "</title></head><body><div>"
 						+ seminar.course().name() + ":</div><ul><li>"
 						+ seminar.course().description() + "</li><li>"
-						+ seminar.location() + "</li><li>" + seminar.seatsLeft()
+						+ seminar.location() + "</li><li>"
+						+ seminar.course().startDate() + "</li><li>"
+						+ seminar.seatsLeft()
 						+ "</li></ul><div>partecipanti:</div><ul>";
 	}
 	

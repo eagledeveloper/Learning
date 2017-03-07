@@ -12,14 +12,14 @@ public class Seminar {
 	private final String _location;
 	private final List<Student> _students = new ArrayList<Student>();
 	
-	public Seminar(String location, Course course) {
-		this(location, course, DEFAULT_CAPACITY);
-	}
-	
 	public Seminar(String location, Course course, int capacity) {
 		_course = course;
 		_location = location;
 		_capacity = capacity;
+	}
+	
+	public Seminar(String location, Course course) {
+		this(location, course, DEFAULT_CAPACITY);
 	}
 
 	public Course course() {

@@ -11,6 +11,7 @@ public class Csv extends SeminarPrinter {
 						quote(seminar.course().name()) + ";" +
 						quote(seminar.course().description()) + ";" +
 						quote(seminar.location()) + ";" +
+						quote(seminar.course().startDate()) + ";" +
 						quote(seminar.seatsLeft()) + System.getProperty("line.separator");
 	}
 	

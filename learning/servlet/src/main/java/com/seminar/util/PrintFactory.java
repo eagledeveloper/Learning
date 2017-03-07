@@ -51,7 +51,7 @@ public class PrintFactory {
 			    "					<div class='form-group'>                                                                                                     " +
 			    "						<label for='name' class='col-sm-2 control-label'>Course Name</label>                                                     " +
 			    "						<div class='col-sm-10'>                                                                                                  " +
-			    "							<input type='text' class='form-control' id='coursName' name='coursName' placeholder='Course Name' value='' required='true'>" +
+			    "							<input type='text' class='form-control' id='courseName' name='courseName' placeholder='Course Name' value='' required='true'>" +
 			    "						</div>                                                                                                                   " +
 			    "					</div>                                                                                                                       " +
 			    

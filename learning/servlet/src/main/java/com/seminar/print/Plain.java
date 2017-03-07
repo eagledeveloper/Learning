@@ -10,6 +10,7 @@ public class Plain extends SeminarPrinter {
 		return  "***************************************************************************************************************\n" +
 				"Seminario di " + seminar.course().name() + " (" + seminar.course().number() + ") su " + seminar.course().description() + "\n" +
 				"Il seminario si terra' presso " + seminar.location() + " e al momento ci sono ancora " + seminar.seatsLeft() + " posti disponibili\n" +
+				"Data di inizio: " + seminar.course().startDate() + "\n" +
 				"***************************************************************************************************************\n\n" +
 				"Gli studenti attualmente iscritti sono: \n";
 	}

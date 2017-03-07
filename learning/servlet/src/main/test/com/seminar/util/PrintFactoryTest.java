@@ -11,7 +11,7 @@ public class PrintFactoryTest {
 
 	@Before
 	public void setUp() {
-		Seminar seminar = new Seminar("Zürich", new Course("Computer science", 1, "Lorem ipsum dolor sit amet"));
+		Seminar seminar = new Seminar("Zürich", new Course("Computer science", 1, "Lorem ipsum dolor sit amet", "01.01.2017"));
 		seminar.enroll(new Student("Ugo", "Campione"));
 		seminar.enroll(new Student("Sandra", "Bach"));
 		_printFactory = new PrintFactory(seminar);
@@ -22,6 +22,7 @@ public class PrintFactoryTest {
 		String expected = "***************************************************************************************************************\n" +
 				"Seminario di Computer science (1) su Lorem ipsum dolor sit amet\n" +
 				"Il seminario si terra' presso Zürich e al momento ci sono ancora 18 posti disponibili\n" +
+				"Data di inizio: 01.01.2017\n" +
 				"***************************************************************************************************************\n\n" +
 				"Gli studenti attualmente iscritti sono: \n" +
 				"			** Ugo Campione ** \n" +
@@ -40,6 +41,7 @@ public class PrintFactoryTest {
 				"<ul>"+
 				"<li>Lorem ipsum dolor sit amet</li>"+
 				"<li>Zürich</li>"+
+				"<li>01.01.2017</li>"+
 				"<li>18</li>"+
 				"</ul>"+
 				"<div>partecipanti:</div>"+
@@ -54,7 +56,7 @@ public class PrintFactoryTest {
 
 	@Test
 	public void csv() {
-		String expected = "\"1\";\"Computer science\";\"Lorem ipsum dolor sit amet\";\"Zürich\";\"18\"\n" +
+		String expected = "\"1\";\"Computer science\";\"Lorem ipsum dolor sit amet\";\"Zürich\";\"01.01.2017\";\"18\"\n" +
 				"\"Ugo\";\"Campione\"\n" +
 				"\"Sandra\";\"Bach\"\n";
 		assertEquals(expected, _printFactory.printCsv());
