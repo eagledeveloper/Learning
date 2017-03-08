@@ -14,9 +14,9 @@ public class HtmlForm {
 
 				TagCreator.div().withClass("container").with(
 
-						TagCreator.div().withClass("row").with(
+//						TagCreator.div().withClass("row").with(
 
-								TagCreator.div().withClass("col-md-6 col-md-offset-3").with(
+//								TagCreator.div().withClass("col-md-6 col-md-offset-3").with(
 
 										TagCreator.form().withClass("form-horizontal").withRole("form")
 												.withMethod("post").with(
@@ -27,14 +27,20 @@ public class HtmlForm {
 														createInput("Course StartDate", "courseStartDate"),
 														createSubmit()
 
-										), TagCreator.script().withSrc("/js/jquery.min.js"), TagCreator.script().withSrc("/js/bootstrap.min.js")))))).render();
+										)
+//			, TagCreator.script().withSrc("/js/jquery.min.js"), TagCreator.script().withSrc("/js/bootstrap.min.js")
+			))).render();
 	}
 
 	private DomContent createHead() {
 		return TagCreator.head().with(TagCreator.title("Seminar"),
-				TagCreator.link().withRel("stylesheet").withHref("/css/bootstrap.min.css"),
-				TagCreator.meta().withCharset("utf-8"), TagCreator.meta().withContent("IE=edge"),
-				TagCreator.meta().withContent("width=device-width, initial-scale=1"));
+				TagCreator.link().withRel("stylesheet")
+						.withHref("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),
+				TagCreator.meta().withCharset("utf-8"),
+				TagCreator.meta().withContent("width=device-width, initial-scale=1").withName("viewport"),
+				TagCreator.script().withSrc("https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"), 
+				TagCreator.script().withSrc("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js") 
+				);
 	}
 
 	private DomContent createSubhead() {
@@ -44,26 +50,25 @@ public class HtmlForm {
 	}
 
 	private DomContent createInput(String labelName, String idName) {
+		
+		// form-group has-success has-feedback --> glyphicon glyphicon-ok form-control-feedback 
+		// form-group has-warning has-feedback --> glyphicon glyphicon-warning-sign form-control-feedback
+		// form-group has-error has-feedback --> glyphicon glyphicon-remove form-control-feedback
 
 		return
 
-		TagCreator.div().withClass("form-group").with(TagCreator.label(labelName).withClass("col-sm-2 control-label"))
+		TagCreator.div().withClass("form-group has-warning has-feedback").with(TagCreator.label(labelName).withClass("col-sm-2 control-label"))
 				.with(
 
 						TagCreator.div().withClass("col-sm-10").with(
 
 								TagCreator.input().withType("text").withClass("form-control").withId(idName)
-										.withName(idName).withPlaceholder(labelName).withCondRequired(true),
-//								TagCreator.span().withClass("glyphicon glyphicon-ok form-control-feedback"),
-								TagCreator.span().withClass("glyphicon glyphicon-warning-sign form-control-feedback")
+										.withName(idName).withPlaceholder(labelName).withCondRequired(true)
+								, TagCreator.span().withClass("glyphicon glyphicon-remove form-control-feedback")
 
 						)
 
 		);
-
-		/*
-		 * <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-		 */
 
 	}
 

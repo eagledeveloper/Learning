@@ -1,19 +1,19 @@
 package com.seminar.print;
 
-import com.seminar.util.Seminar;
+import com.seminar.util.Course;
 import com.seminar.util.Student;
 
-public class Html extends SeminarPrinter {
+public class Html extends CoursePrinter {
 
 	@Override
-	public String header(Seminar seminar) {
-		return "<html>" + "<head><title>" + seminar.course().name()
+	public String header(Course course) {
+		return "<html>" + "<head><title>" + course.name()
 						+ "</title></head><body><div>"
-						+ seminar.course().name() + ":</div><ul><li>"
-						+ seminar.course().description() + "</li><li>"
-						+ seminar.location() + "</li><li>"
-						+ seminar.course().startDate() + "</li><li>"
-						+ seminar.seatsLeft()
+						+ course.name() + ":</div><ul><li>"
+						+ course.description() + "</li><li>"
+						+ course.location() + "</li><li>"
+						+ course.startDate() + "</li><li>"
+						+ course.seatsLeft()
 						+ "</li></ul><div>partecipanti:</div><ul>";
 	}
 	

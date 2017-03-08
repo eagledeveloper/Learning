@@ -1,18 +1,18 @@
 package com.seminar.print;
 
-import com.seminar.util.Seminar;
+import com.seminar.util.Course;
 import com.seminar.util.Student;
 
-public class Csv extends SeminarPrinter {
+public class Csv extends CoursePrinter {
 
 	@Override
-	public String header(Seminar seminar) {
-		return quote(seminar.course().number()) + ";" +
-						quote(seminar.course().name()) + ";" +
-						quote(seminar.course().description()) + ";" +
-						quote(seminar.location()) + ";" +
-						quote(seminar.course().startDate()) + ";" +
-						quote(seminar.seatsLeft()) + System.getProperty("line.separator");
+	public String header(Course course) {
+		return quote(course.number()) + ";" +
+						quote(course.name()) + ";" +
+						quote(course.description()) + ";" +
+						quote(course.location()) + ";" +
+						quote(course.startDate()) + ";" +
+						quote(course.seatsLeft()) + System.getProperty("line.separator");
 	}
 	
 	@Override

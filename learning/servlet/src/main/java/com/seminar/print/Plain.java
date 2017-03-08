@@ -1,16 +1,16 @@
 package com.seminar.print;
 
-import com.seminar.util.Seminar;
+import com.seminar.util.Course;
 import com.seminar.util.Student;
 
-public class Plain extends SeminarPrinter {
+public class Plain extends CoursePrinter {
 
 	@Override
-	public String header(Seminar seminar) {
+	public String header(Course course) {
 		return  "***************************************************************************************************************\n" +
-				"Seminario di " + seminar.course().name() + " (" + seminar.course().number() + ") su " + seminar.course().description() + "\n" +
-				"Il seminario si terra' presso " + seminar.location() + " e al momento ci sono ancora " + seminar.seatsLeft() + " posti disponibili\n" +
-				"Data di inizio: " + seminar.course().startDate() + "\n" +
+				"Seminario di " + course.name() + " (" + course.number() + ") su " + course.description() + "\n" +
+				"Il seminario si terra' presso " + course.location() + " e al momento ci sono ancora " + course.seatsLeft() + " posti disponibili\n" +
+				"Data di inizio: " + course.startDate() + "\n" +
 				"***************************************************************************************************************\n\n" +
 				"Gli studenti attualmente iscritti sono: \n";
 	}

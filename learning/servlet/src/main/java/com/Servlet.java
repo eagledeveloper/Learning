@@ -1,7 +1,6 @@
 package com;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -13,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.seminar.html.HtmlForm;
 import com.seminar.html.Status404;
 import com.seminar.util.Course;
-import com.seminar.util.PrintFactory;
-import com.seminar.util.Seminar;
-import com.seminar.util.Student;
 
 import j2html.TagCreator;
 import j2html.tags.DomContent;
@@ -47,37 +43,13 @@ public class Servlet extends HttpServlet {
 		courses.add(new Course(parameterMap.get("courseName")[0], Integer.valueOf((parameterMap.get("courseNumber")[0])),
 				parameterMap.get("courseDescription")[0], parameterMap.get("courseStartDate")[0]));
 		
+		// aggiungere validazione qui?
+		
 		resp.sendRedirect("/course/");
 		
 		super.doPost(req, resp);
 	}
 
-	private void printAndDownloadCsv(HttpServletResponse resp) throws IOException {
-		
-		resp.setContentType("text/csv");
-		resp.setHeader("Content-Disposition", "attachment; filename=\"seminar.csv\"");
-	    try
-	    {
-	        OutputStream outputStream = resp.getOutputStream();
-	        String outputResult = new PrintFactory(prepareSeminar()).printCsv();
-	        outputStream.write(outputResult.getBytes());
-	        outputStream.flush();
-	        outputStream.close();
-	    } catch(Exception e) {
-	        System.out.println(e.toString());
-	    }
-		
-	    resp.getWriter().write(new PrintFactory(prepareSeminar()).printCsv());
-		
-	}
-
-	private Seminar prepareSeminar() {
-		Seminar seminar = new Seminar("Mendrisio", new Course("GM Learning", 1, "Internal school at GM", "15.02.2017"));
-		seminar.enroll(new Student("Valentino", "Decarli"));
-		seminar.enroll(new Student("Ugo", "Campione"));
-		return seminar;
-	}
-	
 	private String printCourses() {
 		ArrayList<DomContent> children = new ArrayList<DomContent>();
 		
