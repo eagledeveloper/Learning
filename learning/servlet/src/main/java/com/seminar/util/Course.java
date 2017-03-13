@@ -10,16 +10,25 @@ public class Course {
 	
 	private final String _name,_description, _location;
 	private final Integer _number, _totalSeats;
-	private final Date _startDate;
+	private Date _startDate;
 	private final List<Student> _students = new ArrayList<Student>();
 
-	public Course(String courseName, int courseNumber, String description, String startDate, String location, int totalSeats) throws ParseException {
+	public Course(String courseName, int courseNumber, String description, String startDate, String location, int totalSeats) {
 		_name = courseName;
 		_number = courseNumber;
 		_description = description;
-		_startDate = new SimpleDateFormat("dd.mm.yyyy").parse(startDate);
+		try {
+			_startDate = new SimpleDateFormat("dd.mm.yyyy").parse(startDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			_startDate = new Date();
+		}
 		_location = location;
 		_totalSeats = totalSeats;
+	}
+	
+	public Course(String courseName, String startDate, String location, int totalSeats) {
+		this(courseName, 0, "No description", startDate, location, totalSeats);
 	}
 	
 	public String location() {

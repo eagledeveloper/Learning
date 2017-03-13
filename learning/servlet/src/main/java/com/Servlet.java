@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.seminar.html.HtmlForm;
 import com.seminar.html.Status404;
 import com.seminar.util.Course;
+import com.seminar.util.CourseChecker;
 
 import j2html.TagCreator;
 import j2html.tags.DomContent;
@@ -21,7 +22,7 @@ public class Servlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		courses.add(new Course("Standard Name", 1, "Default description", "15.02.2017"));
+		courses.add(new Course("Standard Name", 1, "Default description", "15.02.2017", "Lugano", 20));
 	}
 
 	@Override
@@ -40,14 +41,25 @@ public class Servlet extends HttpServlet {
 		
 		Map<String, String[]> parameterMap = req.getParameterMap();
 		
-		courses.add(new Course(parameterMap.get("courseName")[0], Integer.valueOf((parameterMap.get("courseNumber")[0])),
-				parameterMap.get("courseDescription")[0], parameterMap.get("courseStartDate")[0]));
-		
 		// aggiungere validazione qui?
 		
-		resp.sendRedirect("/course/");
 		
-		super.doPost(req, resp);
+		String courseName = req.getParameter("courseName");
+		String courseStartDate = req.getParameter("courseStartDate");
+		String courseLocation = req.getParameter("courseLocation");
+		int courseTotalSeats = Integer.valueOf((req.getParameter("courseTotalSeats").isEmpty()? "0" : req.getParameter("courseTotalSeats")));
+		int courseNumber = Integer.valueOf((req.getParameter("courseNumber").isEmpty()? "0" : req.getParameter("courseNumber")));
+		String courseDescription = req.getParameter("courseDescription");
+		
+		CourseChecker checker = new CourseChecker(courseName, courseStartDate, courseLocation, courseTotalSeats, courseNumber, courseDescription);
+		
+		if(checker.check()) {
+			courses.add(new Course(courseName, courseStartDate, courseLocation, courseTotalSeats));
+			resp.sendRedirect("/course/");
+		} else {
+			resp.getWriter().write(new HtmlForm().render(checker));
+		}
+		
 	}
 
 	private String printCourses() {
