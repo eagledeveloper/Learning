@@ -37,8 +37,10 @@ public class CourseChecker {
 	
 	public boolean checkStartDate() {
 		
+		if(_startDate.isEmpty()) return false;
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
-	    Date date = null;
+	    Date date = new Date();
 		try {
 			date = sdf.parse(_startDate);
 		} catch (ParseException e) {
@@ -64,7 +66,7 @@ public class CourseChecker {
 	}
 	
 	public boolean checkTotalSeats() {
-		return _totalSeats > 0 && _totalSeats < 30;
+		return _totalSeats > 0;
 	}
 
 	public int getNumber() {
@@ -72,7 +74,7 @@ public class CourseChecker {
 	}
 	
 	public boolean checkNumber() {
-		return _number > 0 && _number < _totalSeats;
+		return _number >= 0 && _number < _totalSeats;
 	}
 
 	public String getDescritpion() {

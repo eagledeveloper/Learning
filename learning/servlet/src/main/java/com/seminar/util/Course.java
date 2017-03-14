@@ -38,7 +38,7 @@ public class Course {
 	public int seatsLeft() {
 		return _totalSeats - _students.size();
 	}
-
+	
 	public String description(){
 		return _description;
 	}

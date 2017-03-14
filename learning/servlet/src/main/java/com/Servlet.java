@@ -22,7 +22,6 @@ public class Servlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		courses.add(new Course("Standard Name", 1, "Default description", "15.02.2017", "Lugano", 20));
 	}
 
 	@Override
@@ -42,7 +41,6 @@ public class Servlet extends HttpServlet {
 		Map<String, String[]> parameterMap = req.getParameterMap();
 		
 		// aggiungere validazione qui?
-		
 		
 		String courseName = req.getParameter("courseName");
 		String courseStartDate = req.getParameter("courseStartDate");
@@ -66,7 +64,7 @@ public class Servlet extends HttpServlet {
 		ArrayList<DomContent> children = new ArrayList<DomContent>();
 		
 		for(Course course : courses) {
-			children.add(TagCreator.li(course.name()));
+			children.add(TagCreator.li(course.name() + " - " + course.location() + " - seats left: " + course.seatsLeft()));
 		}
 		
 		return TagCreator.html().with(TagCreator.ul().with(children)).render();
