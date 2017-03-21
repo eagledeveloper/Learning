@@ -2,6 +2,7 @@ package com;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,38 +10,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.seminar.controller.Controller;
 import com.seminar.html.HtmlForm;
-import com.seminar.html.Status404;
+import com.seminar.model.Model;
 import com.seminar.util.Course;
 import com.seminar.util.CourseChecker;
-
-import j2html.TagCreator;
-import j2html.tags.DomContent;
+import com.seminar.view.View;
 
 public class Servlet extends HttpServlet {
+	
+	private List<Course> courses = new ArrayList<Course>();
+	private Controller controller;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
+		
+		Model model = new Model();
+		View view = new View(courses);
+		controller = new Controller(model, view);
+		
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if(req.getRequestURI().equals("/xxx") || req.getRequestURI().equals("/course/whatever")){
-			resp.getWriter().write(new Status404().render());
-		} else if(req.getRequestURI().equals("/course/")) {
-			resp.getWriter().write(printCourses());
-		} else if(req.getRequestURI().equals("/course/create") || req.getRequestURI().equals("/course/create/")) {
-			resp.getWriter().write(new HtmlForm().render());
-		}
+		controller.handleGet(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Map<String, String[]> parameterMap = req.getParameterMap();
+//		controller.handlePost();
 		
-		// aggiungere validazione qui?
+		// renderlo OCP 100%
+		
+		Map<String, String[]> parameterMap = req.getParameterMap();
 		
 		String courseName = req.getParameter("courseName");
 		String courseStartDate = req.getParameter("courseStartDate");
@@ -60,16 +64,4 @@ public class Servlet extends HttpServlet {
 		
 	}
 
-	private String printCourses() {
-		ArrayList<DomContent> children = new ArrayList<DomContent>();
-		
-		for(Course course : courses) {
-			children.add(TagCreator.li(course.name() + " - " + course.location() + " - seats left: " + course.seatsLeft()));
-		}
-		
-		return TagCreator.html().with(TagCreator.ul().with(children)).render();
-	}
-	
-	private ArrayList<Course> courses = new ArrayList<Course>();
-	
 }

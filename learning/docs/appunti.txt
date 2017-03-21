@@ -1,0 +1,86 @@
+
+The Liskov Substitution Principle
+
+Subtypes must be substitutable for their base types.
+If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.
+
+A violation of LSP causing a violation of OCP
+ 
+Square class should be derived from the Rectangle class
+Square does not need both height and width member variables
+this is wasteful --> create hundreds of thousands of Square objects such as a CAD/CAE program
+Square will inherit the Width and Height setter properties. These properties are inappropriate for a Square
+
+mettere virtual qualcosa bla bla che non ho capito
+
+So here is the real problem: The author of g assumed that changing the width of a Rectangle leaves its height unchanged
+Function g shows that there exist functions that take Rectangle objects but that cannot operate properly on Square objects
+
+It is the author of Square who has violated the invariant. Interestingly enough, the author of Square did not violate an invariant of Square. By deriving Square from Rectangle, the author of Square violated an invariant of Rectangle!
+
+A model, viewed in isolation, cannot be meaningfully validated.
+
+when we examined the final version of the Square and Rectangle classes in isolation, we found that they were self-consistent and valid. Yet when we looked at them from the viewpoint of a programmer who made reasonable assumptions about the base class, the model broke down.
+
+When considering whether a particular design is appropriate, one cannot simply view the solution in isolation. One must view it in terms of the reasonable assumptions made by the users of that design --> unit test tdd
+
+How do you know what your clients will really expect?
+The technique is called design by contract (DBC) and is expounded by Bertrand Meyer.
+
+The contract is specified by declaring preconditions and postconditions for each method
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# The Interface Segregation Principle (ISP)
+
+Classes whose interfaces are not cohesive have "fat" interfaces.
+the interfaces of the class can be broken up into groups of methods.
+
+## Interface Pollution
+
+The interface has been polluted with a method that it does not require.
+incorporate this method solely for the benefit of one of its subclasses
+every time a derivative needs a new method, that method will be added to the base class, making it "fat."
+
+## Separate Clients Mean Separate Interfaces
+
+The Interface Segregation Principle
+Clients should not be forced to depend on methods they do not use.
+
+## Class Interfaces versus Object Interfaces
+
+an object that has two separate interfaces used by two separate clients
+These two interfaces must be implemented in the same object, since the implementation of both interfaces manipulates the same data
+How can we separate the interfaces when they must remain together?
+The answer lies in the fact that clients of an object do not need to access it through the interface of the object. Rather, they can access it through delegation or through a base class of the object.
+
+### Separation Through Delegation
+
+
+
+### Separation Through Multiple Inheritance
+
+
+
+
+Arrivato a pagina 220
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

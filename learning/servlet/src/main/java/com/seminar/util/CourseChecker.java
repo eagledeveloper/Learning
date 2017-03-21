@@ -74,7 +74,8 @@ public class CourseChecker {
 	}
 	
 	public boolean checkNumber() {
-		return _number >= 0 && _number < _totalSeats;
+		return _number >= 0;
+		//&& _number < _totalSeats;
 	}
 
 	public String getDescritpion() {
