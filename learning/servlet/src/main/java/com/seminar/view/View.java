@@ -24,7 +24,7 @@ public class View {
 		ArrayList<DomContent> children = new ArrayList<DomContent>();
 		
 		for(Course course : courses) {
-			children.add(TagCreator.li(course.name() + " - " + course.location() + " - " + course.number() + " - seats left: " + course.seatsLeft()));
+			children.add(TagCreator.li(course.name() + " - " + course.location() + " - " + course.id() + " - seats left: " + course.seatsLeft()));
 		}
 		
 		return TagCreator.html().with(TagCreator.ul().with(children)).render();

@@ -9,13 +9,13 @@ import java.util.List;
 public class Course {
 	
 	private final String _name,_description, _location;
-	private final Integer _number, _totalSeats;
+	private final Integer _id, _totalSeats;
 	private Date _startDate;
 	private final List<Student> _students = new ArrayList<Student>();
 
-	public Course(String courseName, int courseNumber, String description, String startDate, String location, int totalSeats) {
-		_name = courseName;
-		_number = courseNumber;
+	public Course(String name, int id, String description, String startDate, String location, int totalSeats) {
+		_name = name;
+		_id = id;
 		_description = description;
 		try {
 			_startDate = new SimpleDateFormat("dd.mm.yyyy").parse(startDate);
@@ -47,8 +47,8 @@ public class Course {
 		return _name;
 	}
 
-	public Integer number() {
-		return _number;
+	public Integer id() {
+		return _id;
 	}
 	
 	public String startDate() {

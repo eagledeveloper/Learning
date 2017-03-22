@@ -124,8 +124,6 @@ public class HtmlForm {
 						)
 						)
 				)
-				// , TagCreator.script().withSrc("/js/jquery.min.js"),
-				// TagCreator.script().withSrc("/js/bootstrap.min.js")
 				))).render();
 		
 	}

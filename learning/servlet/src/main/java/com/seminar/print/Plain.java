@@ -8,7 +8,7 @@ public class Plain extends CoursePrinter {
 	@Override
 	public String header(Course course) {
 		return  "***************************************************************************************************************\n" +
-				"Seminario di " + course.name() + " (" + course.number() + ") su " + course.description() + "\n" +
+				"Seminario di " + course.name() + " (" + course.id() + ") su " + course.description() + "\n" +
 				"Il seminario si terra' presso " + course.location() + " e al momento ci sono ancora " + course.seatsLeft() + " posti disponibili\n" +
 				"Data di inizio: " + course.startDate() + "\n" +
 				"***************************************************************************************************************\n\n" +

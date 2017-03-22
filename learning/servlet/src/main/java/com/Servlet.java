@@ -13,6 +13,7 @@ import com.seminar.view.View;
 
 public class Servlet extends HttpServlet {
 	
+	private static final long serialVersionUID = 1L;
 	private Controller controller;
 	
 	@Override
@@ -32,29 +33,7 @@ public class Servlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		controller.handlePost(req, resp);
-		
-		// renderlo OCP 100%
-		
-//		Map<String, String[]> parameterMap = req.getParameterMap();
-//		
-//		String courseName = req.getParameter("courseName");
-//		String courseStartDate = req.getParameter("courseStartDate");
-//		String courseLocation = req.getParameter("courseLocation");
-//		int courseTotalSeats = Integer.valueOf((req.getParameter("courseTotalSeats").isEmpty()? "0" : req.getParameter("courseTotalSeats")));
-//		int courseNumber = Integer.valueOf((req.getParameter("courseNumber").isEmpty()? "0" : req.getParameter("courseNumber")));
-//		String courseDescription = req.getParameter("courseDescription");
-//		
-//		CourseChecker checker = new CourseChecker(courseName, courseStartDate, courseLocation, courseTotalSeats, courseNumber, courseDescription);
-//		
-//		if(checker.check()) {
-//			courses.add(new Course(courseName, courseStartDate, courseLocation, courseTotalSeats));
-//			resp.sendRedirect("/course/");
-//		} else {
-//			resp.getWriter().write(new HtmlForm().render(checker));
-//		}
-		
 	}
 
 }

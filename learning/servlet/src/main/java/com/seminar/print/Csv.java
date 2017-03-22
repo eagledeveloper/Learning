@@ -7,7 +7,7 @@ public class Csv extends CoursePrinter {
 
 	@Override
 	public String header(Course course) {
-		return quote(course.number()) + ";" +
+		return quote(course.id()) + ";" +
 						quote(course.name()) + ";" +
 						quote(course.description()) + ";" +
 						quote(course.location()) + ";" +
