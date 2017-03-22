@@ -12,12 +12,6 @@ import j2html.tags.DomContent;
 
 public class View {
 
-	private List<Course> _courses;
-
-	public View(List<Course> courses) {
-		_courses = courses;
-	}
-
 	public String renderStatus404Page() {
 		return new Status404().render();
 	}
@@ -26,14 +20,14 @@ public class View {
 		return new HtmlForm().render();
 	}
 
-	public String renderCourses() {
+	public String renderCourses(List<Course> courses) {
 		ArrayList<DomContent> children = new ArrayList<DomContent>();
 		
-		for(Course course : _courses) {
-			children.add(TagCreator.li(course.name() + " - " + course.location() + " - seats left: " + course.seatsLeft()));
+		for(Course course : courses) {
+			children.add(TagCreator.li(course.name() + " - " + course.location() + " - " + course.number() + " - seats left: " + course.seatsLeft()));
 		}
 		
 		return TagCreator.html().with(TagCreator.ul().with(children)).render();
 	}
-	
+
 }
