@@ -6,7 +6,7 @@ public class EmployeeTest {
 
 	@Test
 	public void test() {
-		Employee employee = new Employee(Employee.SALESMAN);
+//		Employee employee = new Employee(Employee.SALESMAN);
 		
 		
 	}

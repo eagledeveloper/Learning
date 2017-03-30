@@ -3,6 +3,7 @@ package com.seminar.util;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,8 @@ public class PrintFactoryTest {
 
 	@Before
 	public void setUp() throws ParseException {
-		Course course = new Course("Gm course", 1, "Course at gm", "01.01.2017", "Mendrisio", 15);
+		// TODO da mettere a posto
+		Course course = new ValidCourse("Gm course", 1, "Course at gm", new Date(), "Mendrisio", 15);		
 		course.enroll(new Student("Valentino", "Decarli"));
 		course.enroll(new Student("Gino", "Pilotino"));
 		_printFactory = new PrintFactory(course);

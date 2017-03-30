@@ -4,22 +4,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class CourseChecker {
 	
-	private String _courseName, _startDate, _location, _description;
-	private int _totalSeats, _number;
+	private String _courseName, _startDate, _location, _description, _totalSeats, _id;
 
-	public CourseChecker(String courseName, String startDate, String location, int totalSeats, int number, String description) {
+	public CourseChecker(String courseName, String startDate, String location, String totalSeats, String id, String description) {
 		_courseName = courseName;
 		_startDate = startDate;
 		_location = location;
 		_totalSeats = totalSeats;
-		_number = number;
+		_id = id;
 		_description = description;
 	}
 	
 	public boolean check() {
-		return checkCourseName() && checkStartDate() && checkLocation() && checkTotalSeats() && checkNumber() && checkDescription();
+		return checkCourseName() && checkStartDate() && checkLocation() && checkTotalSeats() && checkId() && checkDescription();
 	}
 	
 	public String getCourseName() {
@@ -61,21 +62,20 @@ public class CourseChecker {
 		return !_location.isEmpty();
 	}
 
-	public int getTotalSeats() {
+	public String getTotalSeats() {
 		return _totalSeats;
 	}
 	
 	public boolean checkTotalSeats() {
-		return _totalSeats > 0;
+		return !_totalSeats.isEmpty() && StringUtils.isNumeric(_totalSeats) && Integer.valueOf(_totalSeats) > 0;
 	}
 
-	public int getNumber() {
-		return _number;
+	public String getId() {
+		return _id;
 	}
 	
-	public boolean checkNumber() {
-		return _number >= 0;
-		//&& _number < _totalSeats;
+	public boolean checkId() {
+		return !_id.isEmpty() && StringUtils.isNumeric(_id) && Integer.valueOf(_id) > 0;
 	}
 
 	public String getDescritpion() {

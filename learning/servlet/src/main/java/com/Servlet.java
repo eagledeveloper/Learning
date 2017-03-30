@@ -19,11 +19,9 @@ public class Servlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		
 		Model model = new Model();
 		View view = new View();
 		controller = new Controller(model, view);
-		
 	}
 
 	@Override

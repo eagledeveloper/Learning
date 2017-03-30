@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.seminar.html.HtmlForm;
 import com.seminar.model.Model;
+import com.seminar.util.EmptyCourse;
 import com.seminar.view.View;
 
 public class Controller {
@@ -21,9 +21,9 @@ public class Controller {
 
 	public void handleGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		if(req.getRequestURI().equals("/course/")) {
-			resp.getWriter().write(_view.renderCourses(_model.courses()));
+			resp.getWriter().write(_view.render(_model.courses()));
 		} else if(req.getRequestURI().equals("/course/create") || req.getRequestURI().equals("/course/create/")) {
-			resp.getWriter().write(_view.renderEmptyForm());
+			resp.getWriter().write(_view.render(new EmptyCourse()));
 		} else {
 			resp.getWriter().write(_view.renderStatus404Page());
 		}
@@ -33,12 +33,19 @@ public class Controller {
 		
 		_model.handleRequest(req);
 		
-		if(_model.checker().check()) {
-			resp.getWriter().write(_view.renderCourses(_model.courses()));
+		// todo da sistemare
+//		if(_model.handled()) {
+//			resp.getWriter().write(_view.render(_model.courses()));
+//		} else {
+////			resp.getWriter().write(_view.renderNotEmptyForm(_model.checker()));
+//			resp.getWriter().write(_view.render(_model.notValidCourse()));
+//		}
+		
+		if(_model.handledCorrectly()) {
+			resp.getWriter().write(_view.render(_model.courses()));
 		} else {
-			resp.getWriter().write(new HtmlForm().render(_model.checker()));
+			resp.getWriter().write(_view.renderNotEmptyForm(_model.checker()));
 		}
-		return;
 	}
 
 }

@@ -7,39 +7,45 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.seminar.util.Course;
 import com.seminar.util.CourseChecker;
+import com.seminar.util.ValidCourse;
 
 public class Model {
 	
 	private List<Course> _courses = new ArrayList<Course>();
 	private CourseChecker _checker;
-
-	public void addCourse(Course course) {
-		_courses.add(course);
-	}
-
-	public List<Course> courses() {
-		return _courses;
-	}
+	private Course _notValidCourse;
 
 	public void handleRequest(HttpServletRequest req) {
 		
 		String courseName = req.getParameter("courseName");
 		String courseStartDate = req.getParameter("courseStartDate");
 		String courseLocation = req.getParameter("courseLocation");
-		int courseTotalSeats = Integer.valueOf((req.getParameter("courseTotalSeats").isEmpty()? "0" : req.getParameter("courseTotalSeats")));
-		int courseNumber = Integer.valueOf((req.getParameter("courseNumber").isEmpty()? "0" : req.getParameter("courseNumber")));
+		String courseTotalSeats = req.getParameter("courseTotalSeats");
+		String courseId = req.getParameter("courseId");
 		String courseDescription = req.getParameter("courseDescription");
 		
-		_checker = new CourseChecker(courseName, courseStartDate, courseLocation, courseTotalSeats, courseNumber, courseDescription);
+		_checker = new CourseChecker(courseName, courseStartDate, courseLocation, courseTotalSeats, courseId, courseDescription);
 		
 		if(_checker.check()) {
-			addCourse(new Course(courseName, courseNumber, courseDescription, courseStartDate, courseLocation, courseTotalSeats));
+			_courses.add(new ValidCourse(courseName, courseId, courseDescription, courseStartDate, courseLocation, courseTotalSeats));
 		}
 		
+	}
+	
+	public List<Course> courses() {
+		return _courses;
 	}
 
 	public CourseChecker checker() {
 		return _checker;
+	}
+
+	public boolean handledCorrectly() {
+		return _checker.check();
+	}
+
+	public Course errorCourse() {
+		return _notValidCourse;
 	}
 
 }
