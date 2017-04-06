@@ -1,13 +1,10 @@
 package com.seminar.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.seminar.html.Label;
 
 public class EmptyCourse extends Course {
-	
-	private List<Label> _labels = new ArrayList<>();
 	
 	public EmptyCourse() {
 		_labels.add(new Label("courseName", "Course Name"));

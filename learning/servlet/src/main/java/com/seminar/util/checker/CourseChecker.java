@@ -1,4 +1,4 @@
-package com.seminar.util;
+package com.seminar.util.checker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

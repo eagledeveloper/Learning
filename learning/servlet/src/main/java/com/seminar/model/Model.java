@@ -6,8 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.seminar.util.Course;
-import com.seminar.util.CourseChecker;
+import com.seminar.util.CourseCreator;
 import com.seminar.util.ValidCourse;
+import com.seminar.util.checker.CourseChecker;
 
 public class Model {
 	
@@ -24,7 +25,9 @@ public class Model {
 		String courseId = req.getParameter("courseId");
 		String courseDescription = req.getParameter("courseDescription");
 		
+		// TODO to change
 		_checker = new CourseChecker(courseName, courseStartDate, courseLocation, courseTotalSeats, courseId, courseDescription);
+		CourseCreator courseCreator = new CourseCreator(courseName, courseStartDate, courseLocation, courseTotalSeats, courseId, courseDescription);
 		
 		if(_checker.check()) {
 			_courses.add(new ValidCourse(courseName, courseId, courseDescription, courseStartDate, courseLocation, courseTotalSeats));

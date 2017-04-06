@@ -37,7 +37,7 @@ public class Controller {
 //		if(_model.handled()) {
 //			resp.getWriter().write(_view.render(_model.courses()));
 //		} else {
-////			resp.getWriter().write(_view.renderNotEmptyForm(_model.checker()));
+////		resp.getWriter().write(_view.renderNotEmptyForm(_model.checker()));
 //			resp.getWriter().write(_view.render(_model.notValidCourse()));
 //		}
 		

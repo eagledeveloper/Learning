@@ -6,7 +6,7 @@ import java.util.List;
 import com.seminar.html.HtmlRender;
 import com.seminar.html.Status404;
 import com.seminar.util.Course;
-import com.seminar.util.CourseChecker;
+import com.seminar.util.checker.CourseChecker;
 
 import j2html.TagCreator;
 import j2html.tags.DomContent;

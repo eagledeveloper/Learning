@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.seminar.util.Course;
-import com.seminar.util.CourseChecker;
+import com.seminar.util.checker.CourseChecker;
 
 import j2html.TagCreator;
 import j2html.tags.DomContent;
@@ -21,25 +21,18 @@ public class HtmlRender {
 	
 	private String createHtml(List<DomContent> fields) {
 		return TagCreator.html().with(createHead(), TagCreator.body().with(
-
 				TagCreator.div().withClass("container").with(
-
-						 TagCreator.div().withClass("row").with(
-
-						 TagCreator.div().withClass("col-md-6 col-md-offset-3").with(
-						
-						TagCreator.h1("Create Course").withClass("page-header text-center"), 
-
-						TagCreator.form().withClass("form-horizontal").withRole("form").withMethod("post").with(
-
-								fields
-
+						TagCreator.div().withClass("row").with(
+								TagCreator.div().withClass("col-md-6 col-md-offset-3").with(
+										TagCreator.h1("Create Course").withClass("page-header text-center"), 
+										TagCreator.form().withClass("form-horizontal").withRole("form").withMethod("post").with(
+												fields
+												)
+										)
+								)
 						)
-						
-						)
-						 
-						 )
-				))).render();
+				)
+				).render();
 	}
 	
 	private List<DomContent> createInputList(Course course) {
@@ -70,8 +63,7 @@ public class HtmlRender {
 
 	private DomContent createHead() {
 		return TagCreator.head().with(TagCreator.title("Seminar"),
-				TagCreator.link().withRel("stylesheet")
-						.withHref("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),
+				TagCreator.link().withRel("stylesheet").withHref("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),
 				TagCreator.meta().withCharset("utf-8"),
 				TagCreator.meta().withContent("width=device-width, initial-scale=1").withName("viewport"),
 				TagCreator.script().withSrc("https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"),
@@ -132,18 +124,12 @@ public class HtmlRender {
 	}
 
 	private DomContent createSubmit() {
-
 		return TagCreator.div().withClass("form-group").with(
-
 				TagCreator.div().withClass("col-sm-10 col-sm-offset-2").with(
-
 						TagCreator.input().withType("submit").withClass("btn btn-primary").withId("submit")
 								.withName("submit").withValue("Send")
-
 				)
-
 		);
-
 	}
 
 }

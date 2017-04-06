@@ -13,6 +13,7 @@ public abstract class Course {
 	protected int _id, _totalSeats;
 	protected Date _startDate;
 	protected List<Student> _students = new ArrayList<Student>();
+	protected List<Label> _labels = new ArrayList<>();
 	
 //	public Course(String name, int id, String description, Date startDate, String location, int totalSeats) {
 //		_name = name;
