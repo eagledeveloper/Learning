@@ -67,7 +67,7 @@ public class CourseChecker {
 	}
 	
 	public boolean checkTotalSeats() {
-		return !_totalSeats.isEmpty() && StringUtils.isNumeric(_totalSeats) && Integer.valueOf(_totalSeats) > 0;
+		return !_totalSeats.isEmpty() && StringUtils.isNumeric(_totalSeats) && Integer.valueOf(_totalSeats) < 100;
 	}
 
 	public String getId() {
@@ -75,7 +75,7 @@ public class CourseChecker {
 	}
 	
 	public boolean checkId() {
-		return !_id.isEmpty() && StringUtils.isNumeric(_id) && Integer.valueOf(_id) > 0;
+		return _id != null && !_id.isEmpty() && StringUtils.isNumeric(_id) && Integer.valueOf(_id) > 0;
 	}
 
 	public String getDescritpion() {

@@ -9,38 +9,18 @@ import com.seminar.html.Label;
 
 public abstract class Course {
 	
+	public static final String ID = "id";
+	public static final String NAME = "name";
+	public static final String DESCRIPTION = "description";
+	public static final String START_DATE = "startDate";
+	public static final String LOCATION = "location";
+	public static final String TOTAL_SEATS = "totalSeats";
+	
 	protected String _name,_description, _location;
 	protected int _id, _totalSeats;
 	protected Date _startDate;
 	protected List<Student> _students = new ArrayList<Student>();
 	protected List<Label> _labels = new ArrayList<>();
-	
-//	public Course(String name, int id, String description, Date startDate, String location, int totalSeats) {
-//		_name = name;
-//		_id = id;
-//		_description = description;
-//		_startDate = startDate;
-//		_location = location;
-//		_totalSeats = totalSeats;
-//	}
-//
-//	public Course(String name, int id, String description, String startDate, String location, int totalSeats) {
-//		_name = name;
-//		_id = id;
-//		_description = description;
-//		try {
-//			_startDate = new SimpleDateFormat("dd.mm.yyyy").parse(startDate);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//			_startDate = new Date();
-//		}
-//		_location = location;
-//		_totalSeats = totalSeats;
-//	}
-//	
-//	public Course(String courseName, String startDate, String location, int totalSeats) {
-//		this(courseName, 0, "No description", startDate, location, totalSeats);
-//	}
 	
 	public String location() {
 		return _location;

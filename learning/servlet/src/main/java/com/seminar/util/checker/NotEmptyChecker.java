@@ -1,5 +1,7 @@
 package com.seminar.util.checker;
 
+import java.util.List;
+
 public class NotEmptyChecker extends Checker {
 	
 	public NotEmptyChecker(String name, String toCheck) {
@@ -12,8 +14,9 @@ public class NotEmptyChecker extends Checker {
 	}
 
 	@Override
-	public String message() {
-		return isOk() ? _name + " is valid" :  _name + " cannot be empty";
+	public List<String> message() {
+		addMessage(isOk() ? _name + " is valid" :  _name + " cannot be empty");
+		return _messages;
 	}
 
 }

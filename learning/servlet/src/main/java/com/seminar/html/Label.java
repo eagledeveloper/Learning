@@ -1,5 +1,8 @@
 package com.seminar.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Label {
 	
 	// div --> class
@@ -14,7 +17,8 @@ public class Label {
 //	private String _inputName;
 	protected String _labelName, _inputValue;
 //	private String _inputPlaceholder; 
-	protected String _span1Class, _span2Text, _span2Class;
+	protected String _span1Class, _span2Class;
+	protected List<String> _span2Texts = new ArrayList<String>();
 	
 	public Label(String inputId, String labelName) {
 		_inputId = inputId;
@@ -53,12 +57,22 @@ public class Label {
 		return preventNull(_span1Class);
 	}
 	
-	public String span2Text() {
-		return preventNull(_span2Text);
+	public List<String> span2Text() {
+		return preventNull(_span2Texts);
 	}
-	
+
 	public String span2Class() {
 		return preventNull(_span2Class);
+	}
+	
+	private List<String> preventNull(List<String> stringList) {
+		List<String> result = new ArrayList<>();
+		
+		for(String string : stringList) {
+			result.add(preventNull(string));
+		}
+		
+		return result;
 	}
 	
 	private String preventNull(String s) {

@@ -1,5 +1,7 @@
 package com.seminar.util.checker;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class NumericChecker extends Checker {
@@ -10,14 +12,13 @@ public class NumericChecker extends Checker {
 
 	@Override
 	public boolean isOk() {
-		System.out.println("isOk di NumericChecker");
 		return StringUtils.isNumeric(_toCheck);
 	}
 
 	@Override
-	public String message() {
-		System.out.println("message di NumericChecker");
-		return isOk() ? _name + " is a valid number" : _name + " isn't a number";
+	public List<String> message() {
+		addMessage(isOk() ? _name + " is a valid number" : _name + " isn't a number");
+		return _messages;
 	}
 
 }

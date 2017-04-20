@@ -3,6 +3,7 @@ package com.seminar.util.checker;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class DateChecker extends Checker {
 
@@ -29,8 +30,9 @@ public class DateChecker extends Checker {
 	}
 
 	@Override
-	public String message() {
-		return isOk() ? _name + " has a valid format" : _name + " hasn't a valid format, it should be dd.mm.yyyy";
+	public List<String> message() {
+		addMessage(isOk() ? _name + " has a valid format" : _name + " hasn't a valid format, it should be dd.mm.yyyy");
+		return _messages;
 	}
 
 }

@@ -4,23 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.seminar.util.Course;
-import com.seminar.util.checker.CourseChecker;
 
 import j2html.TagCreator;
 import j2html.tags.DomContent;
 
 public class HtmlRender {
 	
+	public String render(List<Course> courses) {
+		ArrayList<DomContent> children = new ArrayList<DomContent>();
+		
+		for(Course course : courses) {
+			children.add(TagCreator.li(course.name() + " - " + course.location() + " - " + course.id() + " - seats left: " + course.seatsLeft()));
+		}
+		
+		return TagCreator.html().with(TagCreator.ul().with(children)).render();
+	}
+	
 	public String render(Course course) {
 		return createHtml(createInputList(course));
 	}
 
-	public String render(CourseChecker checker) {
-		return createHtml(createInputList(checker));
-	}
-	
 	private String createHtml(List<DomContent> fields) {
-		return TagCreator.html().with(createHead(), TagCreator.body().with(
+		return TagCreator.html().with(createHead1(), TagCreator.body().with(
 				TagCreator.div().withClass("container").with(
 						TagCreator.div().withClass("row").with(
 								TagCreator.div().withClass("col-md-6 col-md-offset-3").with(
@@ -47,22 +52,9 @@ public class HtmlRender {
 		return inputList;
 	}
 	
-	private List<DomContent> createInputList(CourseChecker checker) {
-		List<DomContent> inputList = new ArrayList<>();
-		
-		inputList.add(createInput("Course Name", "courseName", checker.checkCourseName(), checker.getCourseName()));
-		inputList.add(createInput("Course Id", "courseId", checker.checkId(), checker.getId()));
-		inputList.add(createInput("Course Description", "courseDescription", checker.checkDescription(), checker.getDescritpion()));
-		inputList.add(createInput("Course StartDate", "courseStartDate", checker.checkStartDate(), checker.getStartDate()));
-		inputList.add(createInput("Course Location", "courseLocation", checker.checkLocation(), checker.getLocation()));
-		inputList.add(createInput("Course Seats", "courseTotalSeats", checker.checkTotalSeats(), checker.getTotalSeats()));
-		inputList.add(createSubmit());
-		
-		return inputList;
-	}
-
 	private DomContent createHead() {
-		return TagCreator.head().with(TagCreator.title("Seminar"),
+		return TagCreator.head().with(
+				TagCreator.title("Seminar"),
 				TagCreator.link().withRel("stylesheet").withHref("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),
 				TagCreator.meta().withCharset("utf-8"),
 				TagCreator.meta().withContent("width=device-width, initial-scale=1").withName("viewport"),
@@ -71,56 +63,38 @@ public class HtmlRender {
 				);
 	}
 	
+	private DomContent createHead1() {
+		return TagCreator.head().with(
+				TagCreator.meta().withContent("text/html; charset=UTF-8").withData("http-equiv", "content-type"),
+				TagCreator.meta().withCharset("utf-8"),
+				TagCreator.title("courses"),
+				TagCreator.meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
+				TagCreator.meta().withContent("IE=edge").withData("http-equiv", "X-UA-Compatible"),
+				TagCreator.link().withRel("stylesheet").withHref("/css/bootstrap.min.css?v=1.0.0").withData("media", "screen"),
+				TagCreator.link().withRel("stylesheet").withHref("/css/custom.css?v=1.0.0"),
+				TagCreator.link().withRel("stylesheet").withHref("/css/app.css?v=1.0.0")
+				);
+	}
+	
 	private DomContent createInput(Label label) {
 		
-		// div --> class
-				// input --> id
-				// input + label --> name
-				// input --> value
-				// input --> placeholder? --> when empty == labelName
-				// span1 --> class
-				// span2 --> text, class
-
-				return TagCreator.div().withClass(label.divClass())
-						.with(TagCreator.label(label.labelName()).withClass("col-sm-2 control-label")).with(
-
-								TagCreator.div().withClass("col-sm-10").with(
-
-										TagCreator.input().withType("text").withClass("form-control").withId(label.inputName())
-												.withName(label.inputName()).withValue(label.inputValue()).withPlaceholder(label.inputPlaceholder())
-												, TagCreator.span().withClass(label.span1Class())
-												, TagCreator.span(label.span2Text()).withClass(label.span2Class())
-												
-								)
-
-				);
+		List<DomContent> domContentList = new ArrayList<>();
 		
-	}
-
-	private DomContent createInput(String labelName, String idName, boolean isOk, String value) {
+		domContentList.add(TagCreator.input().withType("text").withClass("form-control").withId(label.inputName())
+				.withName(label.inputName()).withValue(label.inputValue()).withPlaceholder(label.inputPlaceholder()));
 		
-		// div --> class
-		// input --> id
-		// input + label --> name
-		// input --> value
-		// input --> placeholder? --> when empty == labelName
-		// span1 --> class
-		// span2 --> text, class
+		domContentList.add(TagCreator.span().withClass(label.span1Class()));
+		
+		for(String string : label.span2Text()) {
+			domContentList.add(TagCreator.span(string).withClass(label.span2Class()));
+		}
 
-		return TagCreator.div().withClass(isOk? "form-group has-success has-feedback" : "form-group has-error has-feedback")
-				.with(TagCreator.label(labelName).withClass("col-sm-2 control-label")).with(
-
+		return TagCreator.div().withClass(label.divClass())
+				.with(TagCreator.label(label.labelName()).withClass("col-sm-2 control-label")).with(
 						TagCreator.div().withClass("col-sm-10").with(
-
-								TagCreator.input().withType("text").withClass("form-control").withId(idName)
-										.withName(idName).withValue(value)
-										, TagCreator.span().withClass(isOk? "glyphicon glyphicon-ok form-control-feedback" : "glyphicon glyphicon-remove form-control-feedback")
-										, TagCreator.span(isOk? labelName + " is valid" : "Provide a valid " + labelName + "!").withClass("help-block")
-										
-						)
-
-		);
-		
+								domContentList
+								)
+						);
 	}
 
 	private DomContent createSubmit() {

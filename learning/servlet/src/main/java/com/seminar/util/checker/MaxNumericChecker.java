@@ -1,24 +1,28 @@
 package com.seminar.util.checker;
 
-public class MaxNumericChecker extends NumericChecker {
+import java.util.List;
+
+public class MaxNumericChecker extends Checker {
 	
 	private int _maxNumber;
+	private Checker _checker;
 
 	public MaxNumericChecker(String name, String toCheck, int maxNumber) {
 		super(name, toCheck);
 		_maxNumber = maxNumber;
+		_checker = new NumericChecker(name, toCheck);
 	}
 	
 	@Override
 	public boolean isOk() {
-		System.out.println("isOk di MaxNumericChecker");
-		return super.isOk() && Integer.valueOf(_toCheck) < _maxNumber;
+		return _checker.isOk() && Integer.valueOf(_toCheck) < _maxNumber;
 	}
 	
 	@Override
-	public String message() {
-		System.out.println("message di MaxNumericChecker");
-		return super.message() + (isOk() ? "" : "\n" + _name + " is to high, it should be less than " + _maxNumber);
+	public List<String> message() {
+		if(!_checker.isOk()) return _checker.message();
+		addMessage(isOk() ? _name + " is valid" : _name + " is too high, it should be less than " + _maxNumber);
+		return _messages;
 	}
 
 }

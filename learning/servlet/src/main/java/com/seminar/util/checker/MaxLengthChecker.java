@@ -1,5 +1,7 @@
 package com.seminar.util.checker;
 
+import java.util.List;
+
 public class MaxLengthChecker extends Checker {
 	
 	private int _maxLength;
@@ -15,8 +17,9 @@ public class MaxLengthChecker extends Checker {
 	}
 
 	@Override
-	public String message() {
-		return isOk() ? _name + " length is ok" : _name + " is to long";
+	public List<String> message() {
+		addMessage(isOk() ? _name + " length is ok" : _name + " is to long");
+		return _messages;
 	}
 
 }
