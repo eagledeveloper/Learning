@@ -142,11 +142,6 @@ public class CheckerTest {
 		_checker = new AlwaysValidChecker("AlwaysValidChecker", "abc");
 		assertTrue(_checker.isOk());
 		assertEquals("AlwaysValidChecker is valid!", _checker.message().get(0));
-		
-		
-		
-		
-		
 	}
 
 }

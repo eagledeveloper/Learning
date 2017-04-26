@@ -66,13 +66,27 @@ The answer lies in the fact that clients of an object do not need to access it t
 
 Arrivato a pagina 220
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# The Dependency-Inversion Principle
 
+- High-level modules should not depend on low-level modules. Both should depend on abstractions
+- Abstractions should not depend upon details. Details should depend upon abstractions
 
+It is the high-level modules that contain the important policy decisions and business models of an application
 
+It is the high-level, policy-setting modules that ought to be influencing the low-level detailed modules
 
+Highlevel modules simply should not depend on low-level modules in any way
 
+When high-level modules depend on low-level modules, it becomes very difficult to reuse those high-level modules in different contexts
 
+the highlevel modules can be reused quite simply
+
+## Layering
+
+all well structured object-oriented architectures have clearly-defined layers, with each layer providing some coherent set of services through a well-defined and controlled interface
 
 
 

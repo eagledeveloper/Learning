@@ -1,13 +1,16 @@
 package com.seminar.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.seminar.util.checker.AlwaysValidChecker;
 import com.seminar.util.checker.Checker;
 import com.seminar.util.checker.DateChecker;
+import com.seminar.util.checker.MaxLengthChecker;
 import com.seminar.util.checker.MaxNumericChecker;
 import com.seminar.util.checker.MinNumericChecker;
+import com.seminar.util.checker.MultiChecker;
 import com.seminar.util.checker.NotEmptyChecker;
 
 public class CourseCreator {
@@ -19,7 +22,11 @@ public class CourseCreator {
 		_nameChecker = createNotEmptyChecker(Course.NAME, name);
 		_startDateChecker = new DateChecker(Course.START_DATE, startDate);
 		_locationChecker = createNotEmptyChecker(Course.LOCATION, location);
-		_totalSeatsChecker = new MaxNumericChecker(Course.TOTAL_SEATS, totalSeats, 100);
+		
+		Checker maxNumericChecker = new MaxNumericChecker(Course.TOTAL_SEATS, totalSeats, 100);
+		Checker maxLengthChecker = new MaxLengthChecker(Course.TOTAL_SEATS, totalSeats, 3);
+		_totalSeatsChecker = new MultiChecker(Course.TOTAL_SEATS, totalSeats, Arrays.asList(maxNumericChecker, maxLengthChecker));
+		
 		_idChecker = new MinNumericChecker(Course.ID, id, 0);
 		_descriptionChecker = new AlwaysValidChecker(Course.DESCRIPTION, description);
 		

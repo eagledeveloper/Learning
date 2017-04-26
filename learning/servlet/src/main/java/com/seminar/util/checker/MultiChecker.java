@@ -24,6 +24,8 @@ public class MultiChecker extends Checker {
 	@Override
 	public List<String> message() {
 		for(Checker checker : _checkers) {
+			// TODO having a single ok message?
+//			if(!checker.isOk())
 			_messages.addAll(checker.message());
 		}
 		return _messages;

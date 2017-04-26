@@ -10,34 +10,52 @@ import j2html.tags.DomContent;
 
 public class HtmlRender {
 	
-	public String render(List<Course> courses) {
-		ArrayList<DomContent> children = new ArrayList<DomContent>();
-		
+	public String renderNew(List<Course> courses) {
+		List<DomContent> courseData = new ArrayList<DomContent>();
+
 		for(Course course : courses) {
-			children.add(TagCreator.li(course.name() + " - " + course.location() + " - " + course.id() + " - seats left: " + course.seatsLeft()));
+			courseData.add(
+					TagCreator.tr().with(
+							TagCreator.td(course.id().toString()),
+							TagCreator.th(course.name()).attr("scope", "row"),
+							TagCreator.td(course.location()),
+							TagCreator.td("" + course.seatsLeft()),
+							TagCreator.td(course.startDate())
+				)
+			);
 		}
 		
-		return TagCreator.html().with(TagCreator.ul().with(children)).render();
-	}
-	
-	public String render(Course course) {
-		return createHtml(createInputList(course));
-	}
-
-	private String createHtml(List<DomContent> fields) {
-		return TagCreator.html().with(createHead1(), TagCreator.body().with(
-				TagCreator.div().withClass("container").with(
-						TagCreator.div().withClass("row").with(
-								TagCreator.div().withClass("col-md-6 col-md-offset-3").with(
-										TagCreator.h1("Create Course").withClass("page-header text-center"), 
-										TagCreator.form().withClass("form-horizontal").withRole("form").withMethod("post").with(
-												fields
+		DomContent courseElement = 
+				TagCreator.div().withClass("col-lg-8 col-md-8 col-sm-9").with(
+						TagCreator.table().withClass("table table-striped").with(
+								TagCreator.thead().with(
+										TagCreator.tr().with(
+												TagCreator.th("id"),
+												TagCreator.th("name"),
+												TagCreator.th("location"),
+												TagCreator.th("totalSeats"),
+												TagCreator.th("start")
 												)
-										)
+										),
+								TagCreator.tbody().with(courseData)
 								)
 						)
-				)
-				).render();
+				;
+		
+		return showView(courseElement);
+	}
+
+	public String renderNew(Course course) {
+		return showView(createHtml(createInputList(course)));
+	}
+
+	private DomContent createHtml(List<DomContent> fields) {
+		
+		return TagCreator.div().withClass("col-lg-8 col-md-8 col-sm-9").with(
+				TagCreator.form().withClass("form-horizontal").withAction("/course/create").withMethod("post").with(
+						fields
+						)
+				);
 	}
 	
 	private List<DomContent> createInputList(Course course) {
@@ -48,32 +66,10 @@ public class HtmlRender {
 		}
 		
 		inputList.add(createSubmit());
+		inputList.add(TagCreator.script().withSrc("/js/jquery.min.js"));
+		inputList.add(TagCreator.script().withSrc("/js/bootstrap.min.js"));
 		
 		return inputList;
-	}
-	
-	private DomContent createHead() {
-		return TagCreator.head().with(
-				TagCreator.title("Seminar"),
-				TagCreator.link().withRel("stylesheet").withHref("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),
-				TagCreator.meta().withCharset("utf-8"),
-				TagCreator.meta().withContent("width=device-width, initial-scale=1").withName("viewport"),
-				TagCreator.script().withSrc("https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"),
-				TagCreator.script().withSrc("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-				);
-	}
-	
-	private DomContent createHead1() {
-		return TagCreator.head().with(
-				TagCreator.meta().withContent("text/html; charset=UTF-8").withData("http-equiv", "content-type"),
-				TagCreator.meta().withCharset("utf-8"),
-				TagCreator.title("courses"),
-				TagCreator.meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
-				TagCreator.meta().withContent("IE=edge").withData("http-equiv", "X-UA-Compatible"),
-				TagCreator.link().withRel("stylesheet").withHref("/css/bootstrap.min.css?v=1.0.0").withData("media", "screen"),
-				TagCreator.link().withRel("stylesheet").withHref("/css/custom.css?v=1.0.0"),
-				TagCreator.link().withRel("stylesheet").withHref("/css/app.css?v=1.0.0")
-				);
 	}
 	
 	private DomContent createInput(Label label) {
@@ -98,12 +94,90 @@ public class HtmlRender {
 	}
 
 	private DomContent createSubmit() {
-		return TagCreator.div().withClass("form-group").with(
+		return TagCreator.div().withClass("form-group").with( 
 				TagCreator.div().withClass("col-sm-10 col-sm-offset-2").with(
-						TagCreator.input().withType("submit").withClass("btn btn-primary").withId("submit")
-								.withName("submit").withValue("Send")
+						TagCreator.input()
+						.withType("submit")
+						.withClass("btn btn-primary")
+						.withId("submit")
+						.withValue("Send")
+						)
+				);
+	}
+	
+	public String showView(DomContent domContent) {
+		return TagCreator.html().with(
+				TagCreator.head().with(
+						TagCreator.meta().withContent("text/html; charset=UTF-8").attr("http-equiv", "content-type"),
+						TagCreator.meta().withCharset("UTF-8"),
+						TagCreator.title("Create courses"),
+						TagCreator.meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
+						TagCreator.meta().withContent("IE=edge").attr("http-equiv", "X-UA-Compatible"),
+						TagCreator.link().withRel("stylesheet").withHref("/css/bootstrap.min.css").attr("media", "screen"),
+						TagCreator.link().withRel("stylesheet").withHref("/css/custom.css"),
+						TagCreator.link().withRel("stylesheet").withHref("/css/app.css")
+						),	
+				TagCreator.body().with(
+						TagCreator.div().withClass("navbar navbar-default navbar-fixed-top").with(
+								TagCreator.div().withClass("container").with(
+										TagCreator.div().withClass("navbar-header").with(
+												TagCreator.a("Seminar").withHref("/").withClass("navbar-brand"),
+												TagCreator.button().withClass("navbar-toggle").withType("button")
+												.withData("data-toggle", "collapse").withData("data-target", "#navbar-main").with(
+														TagCreator.span().withClass("icon-bar"),
+														TagCreator.span().withClass("icon-bar"),
+														TagCreator.span().withClass("icon-bar")
+														)
+												),
+										TagCreator.div().withClass("navbar-collapse collapse").withId("navbar-main").with(
+												TagCreator.ul().withClass("nav navbar-nav navbar-right").with(
+														TagCreator.li().withClass("dropdown").with(
+																TagCreator.a("Account").withClass("dropdown-toggle").attr("data-toggle", "dropdown")
+																.withId("download").withHref("#").attr("aria-expanded", "false").with(TagCreator.span().withClass("caret")),
+																TagCreator.ul().withClass("dropdown-menu").attr("aria-labelledby", "download").with(
+																		TagCreator.li().with(TagCreator.a("settings").withHref("/")),
+																		TagCreator.li().withClass("divider"),
+																		TagCreator.li().with(TagCreator.a("logout").withHref("/"))
+																		)
+																)
+														)
+												)
+										)
+								),
+						TagCreator.div().withClass("container").with(
+								TagCreator.div().withClass("page-header").withId("banner").with(
+										TagCreator.div().withClass("row").with(
+												TagCreator.div().withClass("col-lg-8 col-md-7 col-sm-6").with(
+														TagCreator.h1("Seminar"),
+														TagCreator.p("Manage your courses!").withClass("lead")
+														)
+												),
+										TagCreator.div().withClass("row").with(
+												TagCreator.div().withClass("col-lg-2 col-md-2 col-sm-3").with(
+														TagCreator.div().withClass("list-group table-of-contents").with(
+																TagCreator.a("List").withClass("list-group-item").withHref("/course"),
+																TagCreator.a("Create").withClass("list-group-item").withHref("/course/create")
+																)
+														),
+												domContent
+												)
+										),
+								TagCreator.footer().with(
+										TagCreator.div().withClass("row").with(
+												TagCreator.div().withClass("col-lg-12").with(
+														TagCreator.p().with(TagCreator.a("Cerulean theme").withHref("http://bootswatch.com/cerulean").withRel("nofollow")),
+														TagCreator.p("Code released under the ").with(TagCreator.a("MIT License").withHref("https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE")),
+														TagCreator.p("GmTechnologies")
+														)
+												)
+										)
+								),
+						TagCreator.script().withSrc("/js/jquery.min.js?v=1.0.0"),
+						TagCreator.script().withSrc("/js/bootstrap.min.js?v=1.0.0"),
+						TagCreator.script().withSrc("/js/custom.js?v=1.0.0")
+						)
 				)
-		);
+				.render();
 	}
 
 }

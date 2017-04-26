@@ -13,11 +13,11 @@ public class View {
 	}
 	
 	public String render(Course course) {
-		return new HtmlRender().render(course);
+		return new HtmlRender().renderNew(course);
 	}
 
 	public String render(List<Course> courses) {
-		return new HtmlRender().render(courses);
+		return new HtmlRender().renderNew(courses);
 	}
 
 }

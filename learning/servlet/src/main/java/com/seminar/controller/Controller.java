@@ -20,7 +20,8 @@ public class Controller {
 	}
 
 	public void handleGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		if(req.getRequestURI().equals("/course/")) {
+		// TODO how to improve it?
+		if(req.getRequestURI().equals("/course/") || req.getRequestURI().equals("/") || req.getRequestURI().equals("/course")) {
 			resp.getWriter().write(_view.render(_model.courses()));
 		} else if(req.getRequestURI().equals("/course/create") || req.getRequestURI().equals("/course/create/")) {
 			resp.getWriter().write(_view.render(new EmptyCourse()));

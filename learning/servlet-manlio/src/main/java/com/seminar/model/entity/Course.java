@@ -58,7 +58,7 @@ public class Course implements Entity {
 
 	public static MultiValuedMap<String, Rule> rules(){
 		 return new ArrayListValuedHashMap<String, Rule>(){{
-			put(ID,         new NotEmpty());
+			putAll(ID,         asList(new NotEmpty(), new Number(GREATER_THAN, 0)));
 			putAll(NAME, 			  asList(new NotEmpty(), new MaxLength(15)));
 			putAll(LOCATION, 	  asList(new NotEmpty(), new MaxLength(20)));
 			putAll(TOTAL_SEATS, asList(new Number(GREATER_THAN, 0), new Number(LESS_THAN, 100), new MaxLength(3)));

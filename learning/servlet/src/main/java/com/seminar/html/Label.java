@@ -25,6 +25,10 @@ public class Label {
 		_labelName = labelName;
 	}
 	
+	public Label(String id) {
+		this(id, id);
+	}
+
 	public String divClass() {
 		return preventNull(_divClass);
 	}
