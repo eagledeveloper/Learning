@@ -10,7 +10,7 @@ import j2html.tags.DomContent;
 
 public class HtmlRender {
 	
-	public String renderNew(List<Course> courses) {
+	public String render(List<Course> courses) {
 		List<DomContent> courseData = new ArrayList<DomContent>();
 
 		for(Course course : courses) {
@@ -19,7 +19,7 @@ public class HtmlRender {
 							TagCreator.td(course.id().toString()),
 							TagCreator.th(course.name()).attr("scope", "row"),
 							TagCreator.td(course.location()),
-							TagCreator.td("" + course.seatsLeft()),
+							TagCreator.td("" + course.totalSeats()),
 							TagCreator.td(course.startDate())
 				)
 			);
@@ -45,7 +45,7 @@ public class HtmlRender {
 		return showView(courseElement);
 	}
 
-	public String renderNew(Course course) {
+	public String render(Course course) {
 		return showView(createHtml(createInputList(course)));
 	}
 

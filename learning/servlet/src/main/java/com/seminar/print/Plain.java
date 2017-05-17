@@ -9,7 +9,7 @@ public class Plain extends CoursePrinter {
 	public String header(Course course) {
 		return  "***************************************************************************************************************\n" +
 				"Seminario di " + course.name() + " (" + course.id() + ") su " + course.description() + "\n" +
-				"Il seminario si terra' presso " + course.location() + " e al momento ci sono ancora " + course.seatsLeft() + " posti disponibili\n" +
+				"Il seminario si terra' presso " + course.location() + " e al momento ci sono ancora " + course.totalSeats() + " posti disponibili\n" +
 				"Data di inizio: " + course.startDate() + "\n" +
 				"***************************************************************************************************************\n\n" +
 				"Gli studenti attualmente iscritti sono: \n";

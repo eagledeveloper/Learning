@@ -12,7 +12,7 @@ public class Csv extends CoursePrinter {
 						quote(course.description()) + ";" +
 						quote(course.location()) + ";" +
 						quote(course.startDate()) + ";" +
-						quote(course.seatsLeft()) + System.getProperty("line.separator");
+						quote(course.totalSeats()) + System.getProperty("line.separator");
 	}
 	
 	@Override

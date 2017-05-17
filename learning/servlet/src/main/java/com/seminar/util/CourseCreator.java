@@ -30,11 +30,11 @@ public class CourseCreator {
 		_idChecker = new MinNumericChecker(Course.ID, id, 0);
 		_descriptionChecker = new AlwaysValidChecker(Course.DESCRIPTION, description);
 		
+//		_checkers.add(_idChecker);
 		_checkers.add(_nameChecker);
 		_checkers.add(_startDateChecker);
 		_checkers.add(_locationChecker);
 		_checkers.add(_totalSeatsChecker);
-		_checkers.add(_idChecker);
 		_checkers.add(_descriptionChecker);
 	}
 	
@@ -50,7 +50,8 @@ public class CourseCreator {
 	}
 	
 	private Course validCourse() {
-		return new ValidCourse(_nameChecker.value(), _idChecker.value(), _descriptionChecker.value(), _startDateChecker.value(), _locationChecker.value(), _totalSeatsChecker.value());
+		// TODO trick per nulla bello... per non dire altro...
+		return new ValidCourse(_nameChecker.value(), "-1", _descriptionChecker.value(), _startDateChecker.value(), _locationChecker.value(), _totalSeatsChecker.value());
 	}
 
 	private Course notValidCourse() {

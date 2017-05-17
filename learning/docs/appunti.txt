@@ -91,9 +91,13 @@ all well structured object-oriented architectures have clearly-defined layers, w
 
 
 
+Figure 11-4 allows a Button to control any device
+ 
+means that Button objects will be able to control objects that have not yet been invented.
 
+the dependency is in name only -->  fix that by changing the name
 
-
+nobody owns the interface. We have the interesting situation whereby the interface can be used by lots of different clients, and implemented by lots of different servers
 
 
 

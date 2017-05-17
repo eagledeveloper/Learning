@@ -26,7 +26,7 @@ public abstract class Course {
 		return _location;
 	}
 
-	public int seatsLeft() {
+	public int totalSeats() {
 		return _totalSeats - _students.size();
 	}
 	

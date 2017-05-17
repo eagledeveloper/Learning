@@ -7,7 +7,7 @@ import com.seminar.html.Label;
 public class EmptyCourse extends Course {
 	
 	public EmptyCourse() {
-		_labels.add(new Label(Course.ID));
+//		_labels.add(new Label(Course.ID));
 		_labels.add(new Label(Course.NAME));
 		_labels.add(new Label(Course.DESCRIPTION));
 		_labels.add(new Label(Course.START_DATE));

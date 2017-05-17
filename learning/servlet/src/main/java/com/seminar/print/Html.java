@@ -13,7 +13,7 @@ public class Html extends CoursePrinter {
 						+ course.description() + "</li><li>"
 						+ course.location() + "</li><li>"
 						+ course.startDate() + "</li><li>"
-						+ course.seatsLeft()
+						+ course.totalSeats()
 						+ "</li></ul><div>partecipanti:</div><ul>";
 	}
 	

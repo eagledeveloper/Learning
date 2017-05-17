@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.seminar.util.Course;
 import com.seminar.util.CourseCreator;
+import com.seminar.util.Sqlite3Db;
 import com.seminar.util.ValidCourse;
 import com.seminar.util.checker.CourseChecker;
 
@@ -30,7 +31,7 @@ public class Model {
 	}
 	
 	public List<Course> courses() {
-		return _courses;
+		return new Sqlite3Db().courses();
 	}
 
 	public CourseChecker checker() {
@@ -49,6 +50,9 @@ public class Model {
 		Course course = _courseCreator.create();
 		if(course instanceof ValidCourse) {
 			_courses.add(course);
+			
+			new Sqlite3Db().insert(course);
+			
 			return true;
 		}
 		_notValidCourse = course;

@@ -10,7 +10,7 @@ import com.seminar.util.checker.Checker;
 public class NotValidCourse extends Course {
 	
 	public NotValidCourse(Checker idChecker, Checker nameChecker, Checker descriptionChecker, Checker startDateChecker, Checker locationChecker, Checker totalSeatsChecker) {
-		_labels.add(createLabel(Course.ID, idChecker));
+//		_labels.add(createLabel(Course.ID, idChecker));
 		_labels.add(createLabel(Course.NAME, nameChecker));
 		_labels.add(createLabel(Course.DESCRIPTION, descriptionChecker));
 		_labels.add(createLabel(Course.START_DATE, startDateChecker));
