@@ -9,7 +9,6 @@ import com.seminar.util.checker.Checker;
 import com.seminar.util.checker.DateChecker;
 import com.seminar.util.checker.MaxLengthChecker;
 import com.seminar.util.checker.MaxNumericChecker;
-import com.seminar.util.checker.MinNumericChecker;
 import com.seminar.util.checker.MultiChecker;
 import com.seminar.util.checker.NotEmptyChecker;
 
@@ -27,10 +26,11 @@ public class CourseCreator {
 		Checker maxLengthChecker = new MaxLengthChecker(Course.TOTAL_SEATS, totalSeats, 3);
 		_totalSeatsChecker = new MultiChecker(Course.TOTAL_SEATS, totalSeats, Arrays.asList(maxNumericChecker, maxLengthChecker));
 		
-		_idChecker = new MinNumericChecker(Course.ID, id, 0);
+//		_idChecker = new MinNumericChecker(Course.ID, id, 0);
+		_idChecker = new AlwaysValidChecker(Course.ID, id);
 		_descriptionChecker = new AlwaysValidChecker(Course.DESCRIPTION, description);
 		
-//		_checkers.add(_idChecker);
+		_checkers.add(_idChecker);
 		_checkers.add(_nameChecker);
 		_checkers.add(_startDateChecker);
 		_checkers.add(_locationChecker);
@@ -50,8 +50,7 @@ public class CourseCreator {
 	}
 	
 	private Course validCourse() {
-		// TODO trick per nulla bello... per non dire altro...
-		return new ValidCourse(_nameChecker.value(), "-1", _descriptionChecker.value(), _startDateChecker.value(), _locationChecker.value(), _totalSeatsChecker.value());
+		return new ValidCourse(_nameChecker.value(), _idChecker.value(), _descriptionChecker.value(), _startDateChecker.value(), _locationChecker.value(), _totalSeatsChecker.value());
 	}
 
 	private Course notValidCourse() {

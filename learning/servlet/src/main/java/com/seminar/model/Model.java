@@ -17,6 +17,13 @@ public class Model {
 	private CourseChecker _checker;
 	private Course _notValidCourse;
 	private CourseCreator _courseCreator;
+	private Sqlite3Db _db;
+	
+	private String _id = null;
+	
+	public Model() {
+		_db = new Sqlite3Db();
+	}
 
 	public void handleRequest(HttpServletRequest req) {
 		
@@ -27,11 +34,17 @@ public class Model {
 		String id = req.getParameter(Course.ID);
 		String description = req.getParameter(Course.DESCRIPTION);
 		
+		id = _id == null ? null : _id; 
+		
 		_courseCreator = new CourseCreator(name, startDate, location, totalSeats, id, description);
 	}
 	
 	public List<Course> courses() {
-		return new Sqlite3Db().courses();
+		return _db.courses();
+	}
+
+	public void deleteCourse(int id) {
+		_db.delete(id);
 	}
 
 	public CourseChecker checker() {
@@ -48,15 +61,25 @@ public class Model {
 
 	public boolean handled() {
 		Course course = _courseCreator.create();
+		
 		if(course instanceof ValidCourse) {
 			_courses.add(course);
 			
-			new Sqlite3Db().insert(course);
+			_db.insert(course);
 			
 			return true;
 		}
 		_notValidCourse = course;
 		return false;
+	}
+
+	public Course course(int id) {
+		_id = String.valueOf(id);
+		return _db.selectCourse(id);
+	}
+
+	public void resetId() {
+		_id = "-1";
 	}
 
 }

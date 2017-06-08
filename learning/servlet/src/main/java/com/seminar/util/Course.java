@@ -43,7 +43,7 @@ public abstract class Course {
 	}
 	
 	public String startDate() {
-		return new SimpleDateFormat("dd.MM.yyyy").format(_startDate);
+		return new SimpleDateFormat("dd.mm.yyyy").format(_startDate);
 	}
 	
 	public void enroll(Student student) {

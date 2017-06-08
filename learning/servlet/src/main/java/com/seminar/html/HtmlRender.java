@@ -14,10 +14,14 @@ public class HtmlRender {
 		List<DomContent> courseData = new ArrayList<DomContent>();
 
 		for(Course course : courses) {
+			
+			Integer id = course.id();
+			
 			courseData.add(
 					TagCreator.tr().with(
-							TagCreator.td(course.id().toString()),
-							TagCreator.th(course.name()).attr("scope", "row"),
+							TagCreator.th().with(TagCreator.a("DELETE").withHref("/course/delete/" + id)),
+							TagCreator.th().with(TagCreator.a(course.name()).withHref("/course/" + id)),
+//							TagCreator.th(course.name()).attr("scope", "row"),
 							TagCreator.td(course.location()),
 							TagCreator.td("" + course.totalSeats()),
 							TagCreator.td(course.startDate())
@@ -30,7 +34,7 @@ public class HtmlRender {
 						TagCreator.table().withClass("table table-striped").with(
 								TagCreator.thead().with(
 										TagCreator.tr().with(
-												TagCreator.th("id"),
+												TagCreator.th("action"),
 												TagCreator.th("name"),
 												TagCreator.th("location"),
 												TagCreator.th("totalSeats"),

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class Sqlite3Db {
 		
 		try {
 			ds = (DataSource)new InitialContext().lookup("java:/comp/env/jdbc/ds");
-			connection = ds.getConnection();
+			connection = connection();
+			connection.setAutoCommit(false);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -30,11 +32,18 @@ public class Sqlite3Db {
 		
 	}
 	
+	private Connection connection() throws SQLException {
+		return ds.getConnection();
+	}
+	
 	public void truncateCourse() {
 		String query = "truncate table Course";
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+//			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -42,29 +51,55 @@ public class Sqlite3Db {
 
 	public void insert(Course course) {
 		
+		int id = course.id();
 		String name = course.name();
 		String description = course.description();
 		String location = course.location();
 		int totalSeats = course.totalSeats();
 		String startDate = course.startDate();
 		
-		String sql = "INSERT INTO Course (name, description, location, totalSeats, start) values (?, ?, ?, ?, ?)";
+		String sql = "INSERT OR REPLACE INTO Course (id, name, description, location, totalSeats, start) values (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			
-			ps.setString(1, name);
-			ps.setString(2, description);
-			ps.setString(3, location);
-			ps.setInt(4, totalSeats);
-			ps.setString(5, startDate);
+			if(id < 1) {
+				ps.setNull(1, Types.INTEGER);
+			} else {
+				ps.setInt(1, id);
+			}
+			
+			ps.setString(2, name);
+			ps.setString(3, description);
+			ps.setString(4, location);
+			ps.setInt(5, totalSeats);
+			ps.setString(6, startDate);
 			ps.executeUpdate();
+			connection.commit();
 			ps.close();
+//			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void delete(int id) {
+		String sql = "delete from Course where id = ?";
+		 
+        try {
+ 
+        	PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            connection.commit();
+            ps.close();
+//            connection.close();
+ 
+        } catch (SQLException e) {
+            e.getMessage();
+        }
 	}
 
 	public List<Course> courses() {
@@ -103,6 +138,28 @@ public class Sqlite3Db {
 		String startDate = rs.getString(6);
 		
 		return new ValidCourse(name, id, description, startDate, location, totalSeats);
+	}
+
+	public Course selectCourse(int id) {
+		
+		String query = "select * from Course where id = " + id;
+		Course course = new EmptyCourse();
+		
+		try {
+			 
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			
+			course = (retrieveCourse(rs));
+				
+			statement.close();
+			rs.close();
+			
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+		return course;
 	}
 
 }
